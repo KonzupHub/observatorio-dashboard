@@ -50,32 +50,43 @@ const metrics = [
 
 export const MetricsGrid = () => {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {metrics.map((metric, index) => (
-          <Card key={index} className="transition-all duration-200 hover:shadow-lg">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
-                {metric.title}
-              </CardTitle>
-              <metric.icon className={`h-4 w-4 ${metric.color}`} />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-foreground">
-                {metric.value}
-              </div>
-              {metric.change && (
-                <Badge 
-                  variant="secondary" 
-                  className="mt-2 bg-accent/10 text-accent border-accent/20"
-                >
-                  {metric.change}
-                </Badge>
-              )}
-            </CardContent>
-          </Card>
-        ))}
+    <section className="py-12 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            Visão Geral
+          </h2>
+          <p className="text-gray-600">
+            Principais indicadores do turismo no Rio de Janeiro
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {metrics.map((metric, index) => (
+            <Card key={index} className="transition-all duration-200 hover:shadow-lg">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
+                  {metric.title}
+                </CardTitle>
+                <metric.icon className={`h-4 w-4 ${metric.color}`} />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold text-foreground">
+                  {metric.value}
+                </div>
+                {metric.change && (
+                  <Badge 
+                    variant="secondary" 
+                    className="mt-2 bg-accent/10 text-accent border-accent/20"
+                  >
+                    {metric.change}
+                  </Badge>
+                )}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };

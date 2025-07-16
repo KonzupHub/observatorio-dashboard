@@ -4,8 +4,18 @@ import { MapPin, TrendingUp, Users, ShoppingBag } from 'lucide-react';
 
 export const DataVisualization = () => {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <section className="py-12 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            Visualizações de Dados
+          </h2>
+          <p className="text-gray-600">
+            Análises detalhadas e insights sobre o turismo no Rio de Janeiro
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Mapa Heat-map */}
         <Card className="lg:col-span-2">
           <CardHeader>
@@ -100,7 +110,8 @@ export const DataVisualization = () => {
             </div>
           </CardContent>
         </Card>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };

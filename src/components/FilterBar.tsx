@@ -5,12 +5,12 @@ import { Calendar, Filter } from 'lucide-react';
 
 export const FilterBar = () => {
   return (
-    <div className="bg-card border-b border-border py-4 mt-16">
+    <div className="bg-white border-b border-gray-200 py-6 shadow-sm">
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-6">
           <div className="flex items-center gap-2">
-            <Calendar className="h-4 w-4 text-muted-foreground" />
-            <span className="text-sm font-medium">Período:</span>
+            <Calendar className="h-4 w-4 text-gray-600" />
+            <span className="text-sm font-medium text-gray-700">Período:</span>
           </div>
           
           <Select defaultValue="30days">
@@ -25,8 +25,8 @@ export const FilterBar = () => {
           </Select>
 
           <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-muted-foreground" />
-            <span className="text-sm font-medium">Segmento:</span>
+            <Filter className="h-4 w-4 text-gray-600" />
+            <span className="text-sm font-medium text-gray-700">Segmento:</span>
           </div>
           
           <Select defaultValue="total">
@@ -40,7 +40,7 @@ export const FilterBar = () => {
             </SelectContent>
           </Select>
 
-          <Button size="sm" className="bg-primary hover:bg-primary/90">
+          <Button size="sm" className="bg-blue-900 hover:bg-blue-800 text-white">
             Aplicar
           </Button>
         </div>

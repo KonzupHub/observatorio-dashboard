@@ -12,9 +12,7 @@ export const BossaBot = () => {
 
   const quickQuestions = [
     "Quais bairros cresceram mais este mês?",
-    "Quanto gastaram os turistas de Portugal?",
-    "Qual a sazonalidade do turismo no Rio?",
-    "Como está a satisfação dos visitantes?"
+    "Quanto gastaram os turistas de Portugal?"
   ];
 
   const handleSendMessage = () => {
@@ -23,7 +21,7 @@ export const BossaBot = () => {
     const newUserMessage = { type: 'user' as const, message };
     const botResponse = { 
       type: 'bot' as const, 
-      message: "Exemplo de insight gerado pela IA: Com base nos dados mais recentes, observamos uma tendência de crescimento de 15% nas visitas aos bairros da Zona Sul, principalmente impulsionada por turistas argentinos e franceses. A permanência média aumentou para 6,2 dias neste segmento."
+      message: "Exemplo de insight gerado pela IA"
     };
 
     setChatHistory(prev => [...prev, newUserMessage, botResponse]);
@@ -31,8 +29,13 @@ export const BossaBot = () => {
   };
 
   const handleQuickQuestion = (question: string) => {
-    setMessage(question);
-    handleSendMessage();
+    const newUserMessage = { type: 'user' as const, message: question };
+    const botResponse = { 
+      type: 'bot' as const, 
+      message: "Exemplo de insight gerado pela IA"
+    };
+
+    setChatHistory(prev => [...prev, newUserMessage, botResponse]);
   };
 
   return (
