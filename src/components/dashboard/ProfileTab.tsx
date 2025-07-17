@@ -1,147 +1,89 @@
-
 import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell } from 'recharts';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Users, TrendingUp, Building2 } from 'lucide-react';
 
 export const ProfileTab = () => {
-  const ageData = [
-    { faixa: '18-25', quantidade: 280000, porcentagem: 28 },
-    { faixa: '26-35', quantidade: 350000, porcentagem: 35 },
-    { faixa: '36-45', quantidade: 200000, porcentagem: 20 },
-    { faixa: '46-55', quantidade: 120000, porcentagem: 12 },
-    { faixa: '56+', quantidade: 50000, porcentagem: 5 }
-  ];
-
-  const genderData = [
-    { genero: 'Feminino', valor: 52, cor: '#ec4899' },
-    { genero: 'Masculino', valor: 47, cor: '#3b82f6' },
-    { genero: 'Outros', valor: 1, cor: '#10b981' }
-  ];
-
-  const educationData = [
-    { nivel: 'Superior Completo', porcentagem: 45 },
-    { nivel: 'Superior Incompleto', porcentagem: 25 },
-    { nivel: 'Ensino Médio', porcentagem: 20 },
-    { nivel: 'Pós-graduação', porcentagem: 8 },
-    { nivel: 'Outros', porcentagem: 2 }
+  const employmentData = [
+    { year: '2020', companies: 310 },
+    { year: '2021', companies: 420 },
+    { year: '2022', companies: 510 },
+    { year: '2023', companies: 570 },
+    { year: '2024', companies: 640 }
   ];
 
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="border-l-4 border-l-purple-500">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Idade Média</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">32 anos</div>
-            <p className="text-xs text-muted-foreground">Turistas internacionais</p>
-          </CardContent>
-        </Card>
+    <section id="empregos-empresas" className="py-8">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            Empregos & Empresas
+          </h2>
+          <p className="text-gray-600">
+            Mercado de trabalho e empreendedorismo no turismo
+          </p>
+        </div>
 
-        <Card className="border-l-4 border-l-pink-500">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Gênero Predominante</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">52% F</div>
-            <p className="text-xs text-muted-foreground">Maioria feminina</p>
-          </CardContent>
-        </Card>
-
-        <Card className="border-l-4 border-l-indigo-500">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Escolaridade</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">45%</div>
-            <p className="text-xs text-muted-foreground">Superior completo</p>
-          </CardContent>
-        </Card>
-
-        <Card className="border-l-4 border-l-cyan-500">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Tempo Médio</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">7.3 dias</div>
-            <p className="text-xs text-muted-foreground">Permanência no RJ</p>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Distribuição por Faixa Etária</CardTitle>
-            <CardDescription>Perfil demográfico dos visitantes</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={ageData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="faixa" />
-                <YAxis />
-                <Tooltip formatter={(value) => [`${Number(value).toLocaleString()} pessoas`, 'Quantidade']} />
-                <Bar dataKey="quantidade" fill="#8b5cf6" />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Distribuição por Gênero</CardTitle>
-            <CardDescription>Composição dos visitantes</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={genderData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={({genero, valor}) => `${genero}: ${valor}%`}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="valor"
-                >
-                  {genderData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.cor} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle>Nível de Escolaridade</CardTitle>
-            <CardDescription>Formação educacional dos visitantes</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {educationData.map((item) => (
-                <div key={item.nivel} className="flex items-center justify-between">
-                  <span className="font-medium">{item.nivel}</span>
-                  <div className="flex items-center gap-2">
-                    <div className="w-32 bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-indigo-600 h-2 rounded-full" 
-                        style={{ width: `${item.porcentagem}%` }}
-                      ></div>
-                    </div>
-                    <span className="text-sm font-medium w-10">{item.porcentagem}%</span>
-                  </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Employment Card */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-primary" />
+                Vagas Formais no Turismo
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center py-8">
+                <div className="text-4xl font-bold text-primary mb-2">
+                  168k
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                <div className="text-lg text-gray-600 mb-4">
+                  Postos de trabalho formais
+                </div>
+                <Badge variant="outline" className="text-sm">
+                  Fonte: CAGED (2024)
+                </Badge>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* New Companies Chart */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Building2 className="h-5 w-5 text-accent" />
+                Novas Empresas de Turismo
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {employmentData.map((data, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <span className="font-medium">{data.year}</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-accent rounded-full"
+                          style={{ width: `${(data.companies / 640) * 100}%` }}
+                        />
+                      </div>
+                      <span className="text-sm font-medium w-8 text-right">
+                        {data.companies}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 pt-4 border-t">
+                <Badge variant="outline" className="text-sm">
+                  Fonte: Jucerja
+                </Badge>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };

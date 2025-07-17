@@ -1,130 +1,151 @@
-
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUp, Users, Building2, Globe, MapPin } from 'lucide-react';
-import { TourismChart } from '../TourismChart';
+import React, { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { 
+  Plane, 
+  DollarSign, 
+  Clock, 
+  Building2, 
+  Star, 
+  CloudSun,
+  Info,
+  TrendingUp,
+  TrendingDown
+} from 'lucide-react';
 
 export const OverviewTab = () => {
+  const [selectedPeriod, setSelectedPeriod] = useState('90');
+
+  const metrics = [
+    {
+      id: 'chegadas',
+      icon: Plane,
+      label: 'Chegadas Internacionais',
+      values: { '30': 52000, '90': 148000, '365': 625000 },
+      delta: +12,
+      fonte: 'Nexus / PF',
+      format: (val: number) => `${(val / 1000).toFixed(0)}k`
+    },
+    {
+      id: 'gastos',
+      icon: DollarSign,
+      label: 'Gastos Estimados (USD mi)',
+      values: { '30': 72, '90': 230, '365': 980 },
+      delta: +8,
+      fonte: 'Mastercard',
+      format: (val: number) => `${val}mi`
+    },
+    {
+      id: 'permanencia',
+      icon: Clock,
+      label: 'Permanência Média (dias)',
+      values: { '30': 5.1, '90': 5.4, '365': 5.6 },
+      delta: 0,
+      fonte: 'Pesquisa MTur',
+      format: (val: number) => `${val} dias`
+    },
+    {
+      id: 'ocupacao',
+      icon: Building2,
+      label: 'Ocupação Hoteleira',
+      values: { '30': 76, '90': 74, '365': 71 },
+      delta: 0,
+      fonte: 'Agency360',
+      format: (val: number) => `${val}%`
+    },
+    {
+      id: 'avaliacao',
+      icon: Star,
+      label: 'Avaliação Média (1-5)',
+      values: { '30': 4.6, '90': 4.6, '365': 4.6 },
+      delta: 0,
+      fonte: 'Booking/TripAdvisor',
+      format: (val: number) => `${val}/5`
+    },
+    {
+      id: 'clima',
+      icon: CloudSun,
+      label: 'Clima Médio',
+      values: { '30': '26°C úmido', '90': '25°C úmido', '365': '24°C' },
+      delta: 0,
+      fonte: 'INMET',
+      format: (val: any) => val
+    }
+  ];
+
+  const openModal = (metricId: string) => {
+    alert(`Fonte detalhada: ${metricId}`);
+  };
+
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="border-l-4 border-l-blue-500">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              Turistas Internacionais
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">2.1M</div>
-            <p className="text-xs text-muted-foreground">
-              +15% vs 2023
-            </p>
-          </CardContent>
-        </Card>
+    <section id="painel-executivo" className="py-8">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            Painel Executivo
+          </h2>
+          <p className="text-gray-600">
+            Principais indicadores de performance do turismo
+          </p>
+        </div>
 
-        <Card className="border-l-4 border-l-green-500">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <TrendingUp className="w-4 h-4" />
-              Receita Turística
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">R$ 18.2Bi</div>
-            <p className="text-xs text-muted-foreground">
-              +22% vs 2023
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="border-l-4 border-l-purple-500">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <Building2 className="w-4 h-4" />
-              Ocupação Hoteleira
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">78.4%</div>
-            <p className="text-xs text-muted-foreground">
-              Média anual
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="border-l-4 border-l-orange-500">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium flex items-center gap-2">
-              <Globe className="w-4 h-4" />
-              Gasto Médio/Dia
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">R$ 342</div>
-            <p className="text-xs text-muted-foreground">
-              Por turista
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <TourismChart 
-          title="Taxa de Ocupação Hoteleira"
-          data={[
-            { month: 'Jan', tourists: 180000, revenue: 1200 },
-            { month: 'Fev', tourists: 220000, revenue: 1400 },
-            { month: 'Mar', tourists: 160000, revenue: 1100 },
-            { month: 'Abr', tourists: 140000, revenue: 950 },
-            { month: 'Mai', tourists: 120000, revenue: 850 },
-            { month: 'Jun', tourists: 110000, revenue: 800 },
-            { month: 'Jul', tourists: 190000, revenue: 1300 },
-            { month: 'Ago', tourists: 170000, revenue: 1150 },
-            { month: 'Set', tourists: 130000, revenue: 900 },
-            { month: 'Out', tourists: 150000, revenue: 1000 },
-            { month: 'Nov', tourists: 200000, revenue: 1350 },
-            { month: 'Dez', tourists: 250000, revenue: 1600 }
-          ]}
-        />
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <MapPin className="w-5 h-5" />
-              Top 5 Países de Origem
-            </CardTitle>
-            <CardDescription>Turistas internacionais em 2024</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {[
-                { country: 'Estados Unidos', percentage: 28.4, flag: '🇺🇸' },
-                { country: 'Argentina', percentage: 21.7, flag: '🇦🇷' },
-                { country: 'França', percentage: 12.3, flag: '🇫🇷' },
-                { country: 'Alemanha', percentage: 9.8, flag: '🇩🇪' },
-                { country: 'Itália', percentage: 8.1, flag: '🇮🇹' }
-              ].map((item) => (
-                <div key={item.country} className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="text-xl">{item.flag}</span>
-                    <span className="font-medium">{item.country}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-20 bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-blue-600 h-2 rounded-full" 
-                        style={{ width: `${item.percentage}%` }}
-                      ></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {metrics.map((metric) => {
+            const IconComponent = metric.icon;
+            const currentValue = metric.values[selectedPeriod as keyof typeof metric.values];
+            
+            return (
+              <Card key={metric.id} className="hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <IconComponent className="h-5 w-5 text-primary" />
+                      <CardTitle className="text-sm font-medium">
+                        {metric.label}
+                      </CardTitle>
                     </div>
-                    <span className="text-sm font-medium">{item.percentage}%</span>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => openModal(metric.id)}
+                      className="h-6 w-6"
+                    >
+                      <Info className="h-3 w-3" />
+                    </Button>
                   </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    <div className="text-2xl font-bold text-gray-900">
+                      {typeof currentValue === 'number' ? metric.format(currentValue) : currentValue}
+                    </div>
+                    
+                    {metric.delta !== 0 && (
+                      <div className="flex items-center gap-1">
+                        {metric.delta > 0 ? (
+                          <TrendingUp className="h-4 w-4 text-green-600" />
+                        ) : (
+                          <TrendingDown className="h-4 w-4 text-red-600" />
+                        )}
+                        <span className={`text-sm font-medium ${
+                          metric.delta > 0 ? 'text-green-600' : 'text-red-600'
+                        }`}>
+                          {metric.delta > 0 ? '+' : ''}{metric.delta}%
+                        </span>
+                      </div>
+                    )}
+                    
+                    <Badge variant="secondary" className="text-xs">
+                      {metric.fonte}
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };

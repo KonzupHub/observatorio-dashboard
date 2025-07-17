@@ -11,8 +11,12 @@ export const BossaBot = () => {
   const [chatHistory, setChatHistory] = useState<Array<{type: 'user' | 'bot', message: string}>>([]);
 
   const quickQuestions = [
-    "Quais bairros cresceram mais este mês?",
-    "Quanto gastaram os turistas de Portugal?"
+    "Quais bairros do município receberam mais turistas internacionais este mês?",
+    "Quanto gastaram os turistas de Portugal no município do Rio de Janeiro nos últimos 90 dias?",
+    "Qual foi a permanência média dos visitantes de negócios no último trimestre?",
+    "Como está a ocupação hoteleira 5★ comparada ao mesmo período de 2024?",
+    "Qual país emissor mais cresceu em chegadas aéreas este ano?",
+    "Quantas novas empresas de ecoturismo foram abertas em 2024?"
   ];
 
   const handleSendMessage = () => {
@@ -21,7 +25,7 @@ export const BossaBot = () => {
     const newUserMessage = { type: 'user' as const, message };
     const botResponse = { 
       type: 'bot' as const, 
-      message: "Exemplo de insight gerado pela IA"
+      message: `Insight exemplo: ${message}. Fonte: Observatório Rio Dados`
     };
 
     setChatHistory(prev => [...prev, newUserMessage, botResponse]);
@@ -32,7 +36,7 @@ export const BossaBot = () => {
     const newUserMessage = { type: 'user' as const, message: question };
     const botResponse = { 
       type: 'bot' as const, 
-      message: "Exemplo de insight gerado pela IA"
+      message: `Insight exemplo: ${question}. Fonte: Observatório Rio Dados`
     };
 
     setChatHistory(prev => [...prev, newUserMessage, botResponse]);
